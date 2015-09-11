@@ -87,6 +87,7 @@ Fields:
 * engines (Array of Engine)
 * model (String)
 * model_year (Integer)
+* stock_image_url (String)
 * styles (Array of Style)
 
 Find a vehicle by VIN
