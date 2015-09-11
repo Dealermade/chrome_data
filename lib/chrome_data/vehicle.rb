@@ -2,7 +2,7 @@ module ChromeData
   class Vehicle < BaseRequest
     class Engine < Struct.new(:type); end
 
-    attr_accessor :model_year, :division, :model, :styles, :engines, :standard
+    attr_accessor :model_year, :division, :model, :styles, :engines, :standard, :stock_image
 
     def self.request_name
       "describeVehicle"
@@ -26,12 +26,21 @@ module ChromeData
       parse_styles response
       parse_standard response
       parse_engines response
+      parse_stock_image response
     end
 
     def parse_styles(response)
       @styles = self.class.find_elements('style', response).map do |e|
         create_style e, response
       end
+    end
+
+    def parse_stock_image (response)
+      @stock_image = self.class.find_elements('stockImage', response).map { |e|
+        {
+          "url" => e.attr('url')
+        }
+      }
     end
 
     def parse_standard(response)
