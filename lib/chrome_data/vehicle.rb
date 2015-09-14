@@ -24,7 +24,7 @@ module ChromeData
       @division = vin_description.attr('division')
       @model = vin_description.attr('modelName')
       stock_image = self.class.find_elements('stockImage', response).first
-      @stock_image_url = stock_image.attr('url')
+      @stock_image_url = stock_image.attr('url') if stock_image
       parse_styles response
       parse_standard response
       parse_engines response
